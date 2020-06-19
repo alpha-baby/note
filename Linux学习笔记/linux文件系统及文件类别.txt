@@ -1,0 +1,93 @@
+Linux的文件系统：
+	根文件系统：（root filesystem）
+		
+	LSB FHS：（FileSystem Heirache Standard）
+		/etc /usr /var /root /home /dev
+		
+		/boot 引导文件存放目录：内核文件（vmlinuz）、引导加载器（bootloader，grub）都存放在此目录
+		/bin 供所有用户使用的基本命令：不能关联至独立分区，OS启动会用到的程序
+		/sbin 管理类的基本命令：不能独立分区 
+		/lib: 基本共享库文件，以及内核模块文件（/lib/modules）
+		/lib64: （大多数都是纯文本文件）64位的系统兼容32位的系统 专用于x86_64系统上的辅助共享文件存放的位置：
+		/etc:  /etc/opt  为/opt 目录下的应用程序提供配置文件
+			   /etc/X11 用于x协议 Linux中显示图形是通过协议来实现的
+		/home: 用户家目录 /home/USERNAME 
+		/root 管理员没有的家目录; 在以后最好不用root用户 
+		/media: 挂载便捷式移动设备
+		/mnt: 挂载临时设备
+		/dev: 设备文件及特殊文件存放位置 
+				b: block device 块设备
+				c: character device 字符设备
+		/opt； 第三方应用程序的安装位置
+		/srv: 系统上运行用到的服务用到的中间数据存放的位置
+		/tmp: 临时文件存放位置
+		
+		以上目录除了/boot /home 都不能独立分区
+		
+		/usr: /usr is shareable read_only data. 全局共享只读数据
+			/usr/bin:所用用户都可以使用的应用程序
+			/usr/sbin:root用户才能使用的应用程序
+			/usr/lib：
+			/usr/lib64：库文件存放位置
+			/usr/include： C语言用到的头文件 定义库文件的打开方式
+			/usr/share 结构化独立的数据：例如：doc man等
+			/usr/local: 取代opt 第三方应用程序的安装位置
+				/usr/local/bin
+				/usr/local/sbin
+				/usr/local/lib
+				/usr/local/lib64
+				/usr/local/etc
+				/usr/local/share
+		/var: 通常也关联至独立分区 
+			/var/cache: 缓存数据目录
+			/var/lib: 应用程序状态信息数据
+			/var/local: 专用于/usr/local下的应用程序存储可变文件
+			/var/lock 锁文件
+			/var/log: 日志文件及文件
+			/var/opt: 为/opt 下的应用程序存储可变数据
+			/var/run: 运行中的进程相关的数据，通常用于存储进程的pid文件
+			/var/spool: 应用程序数据池
+			/var/tmp: 保存系统两次重启之间产生的临时数据
+		/proc: 用于输出内核与进程相关的虚拟文件系统
+		/sys: 用于输出当前系统上硬件设备相关的虚拟文件系统（伪文件系统）
+		/misc: 杂项文件
+		/selinux: security enhanced Linux， 色Linux相关的安全策略等信息的存储位置
+Linux上的应用程序通常有四类文件组成：
+	二进制程序： /bin,/sbin,/usr/bin,/usr/sbin,/usr/local/bin,/usr/local/sbin
+	库文件： /lib,/lib64,/usr/lib,/usr/lib64,/usr/local/lib,/usr/local/lib64,
+	配置文件: /usr/share/man,/usr/share/doc,/usr/local/share/man,/usr/local/share/doc
+linux下的文件类型：
+	- (f): 普通文件
+	d: 目录文件
+	b: 块设备：
+	c：字符设备
+	l：符号链接文件
+	p：管道文件
+	s: 套接字文件 socket
+系统管理类命令：
+	关机：
+		halt，poweroff，shutdown，init 0，
+	重启：reboot ，shutdown，，init 6，
+	
+	shutdown:
+		-r reboot 重启
+		-h halt
+		-c cancel 取消关机
+		TIME 
+			now 立刻 
+			+m 表示相对时间表示法 
+			hh:mm  具体关机时间 24小时时间制	
+	用户登录
+		whoami 查看当前登录的用户
+		who 显示当前系统登录的所有的会话信息
+		w: 系统当前所有的登录会话及所做的操作
+		改变了
+			
+
+			
+			
+			
+			
+			
+			
+			

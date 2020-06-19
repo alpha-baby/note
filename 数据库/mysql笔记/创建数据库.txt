@@ -1,0 +1,44 @@
+mysql中的注释：
+	#：
+	--：单行注释
+给字段添加注释：
+	comment 加上注释内容
+创建数据表：
+	create database if not exists `maizi` default character set utf8;
+	use `maizi`;
+	create table if not exists `user`(
+	id SMALLINT,
+	username VARCHAR(20),
+	age TINYINT,
+	sex enum('男','女','保密'),
+	email VARCHAR(50),
+	addr varchar(200),
+	birth year,
+	salary float(8,2),
+	tel int,
+	married tinyint(1) comment '0代表未结婚，1代表结婚'
+	)engine=INNODB CHARSET=utf8;
+注意：我们在新建的时候涉及到中文的时候就应该修改客户端的字符集为gbk
+	\s:查看当前的字符集
+	set names gbk：修改当前会话的客户端字符集为gbk
+练习：1
+	创建课程表 course
+	编号 cid
+	课程名称：coursename
+	课程描述 coursedesc
+	create table if not exists course(
+	cid tinyint,
+	coursename varchar(50),
+	courseDesc varchar(200)
+	);
+练习2、
+	创建新闻分类表cms_cate
+	编号，分类名称、分隔描述
+	create table if not exists cms_cate(
+	id tinyint,
+	cateName varchar(50),
+	cateDesc varchar(200)
+	)engine=MyISAM charset=utf8;
+
+	
+	

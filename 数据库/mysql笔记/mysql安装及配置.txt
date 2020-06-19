@@ -1,0 +1,16 @@
+下载安装mysql的离线安装包离线安装：
+	安装好以后再win下登录及退出mysql：
+		登录：输入命令，mysql -h服务器名称(IP) -P端口号 -u用户名 -p密码 -V输出版本号及退出
+		退出：exit
+	mysql命令中输入\s 命令查看mysql的相关配置
+	net start mysql56 启动mysql服务命令
+	net stop mysql56 停止mysql服务命令
+	配置mysql的字符集
+		1、配置客户端的字符集为utf8
+			[mysql]
+			default-character-set=utf8
+		2、配置服务端的字符集为utf8
+			[mysqld]
+			chareacter-set-server=utf8
+		重启服务配置及成功
+		

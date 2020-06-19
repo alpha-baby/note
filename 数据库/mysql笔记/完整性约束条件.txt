@@ -1,0 +1,27 @@
+主键(primary key)：
+		唯一标识这条记录，一般都有主键，值不能重复，自动的填为非空，一般有单字段主键，多字段主键
+	create table if not exists user1(
+	id int primary key,
+	username varchar(20)
+	);
+	查看创建表的定义：
+		show create table tbl_name;
+	create table if not exists user2(
+	id int,
+	username varchar(20),
+	card char(18),
+	primary key(id,card)
+	);
+自增长（auto_increment）：（一个表中只能有一个自增长的主键）是自增长一定是主键，是主键不一定是自增长
+	create table if not exists user5(
+	id smallint key auto_increment,
+	username varchar(20)
+	);
+	修改自增长值：
+		alter table tbl_name auto_increment=值; 
+外键：
+非空（not null）：
+默认值（default）：
+唯一性约束（unique key）：
+
+	

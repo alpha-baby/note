@@ -1,0 +1,59 @@
+1、创建数据库：(创建数据库就相当于在data目录中创建了文件夹)
+	1、create database 数据库名;
+	2、create schema 数据库名;
+	3、在安装名录的data目录下 创建文件夹，但是文件夹的名称不能包含特殊字符
+2、查看上一条记录的waring：
+	show warings;
+3、查看当前有的数据库：
+	show databases;
+	show schemas;
+查看数据库下面的表：
+	show tables;
+4、查看某个数据库的编码方式：
+	show create database 数据库名称;
+	show create schema 数据库名称;
+5、创建指定编码的数据库：
+	create database if not exits 数据库名称 default character set = '编码';（等号 引号介意去掉）
+6、修改指定已经创建好的数据库的编码方式：
+	alter database 数据库名称 
+7、打开某个指定的数据库：
+	use db_name;
+	显示当前打开的数据库：
+		select database()|schema();
+8、删除指定的数据库：
+	drop database db_name;
+	drop  if databaseexits db_name;（如果存在则删除，否则不删除）
+9、创建表格式：
+	create table [if not exists] tbl_name(
+	字段名 字段类型 [unsigned|zerofile] [not null] [default 默认值] [[primary] key|unique [key]] [auto_increment]
+	);
+10、重命名字段：
+	alter table tbl_name rename new_name;
+	rename tbl_name ro new_name;
+11、添加字段：
+	alter table tbl_name add new_tbl [first | after 某个字段之后];
+	完成多个操作：
+		alter table tbl_name
+		add new_tbl [first | after 某个字段之后],
+		add new_tbl [first | after 某个字段之后],
+		add new_tbl [first | after 某个字段之后];
+12、删除字段：
+	alter table tbl_name drop cloumn_name;
+	一次删除多个字段：
+		alter table tbl_name
+		drop column_name1,
+		drop column_name2,
+		drop column_name3;
+13、给一个字段重命名：
+	alter  table tablename rename column 旧名 to 新名
+14、移动某个字段的位置：
+	alter table tbl_name modify table1 table1的属性 after table2;(把table1 移动到 table2之后)（其中如果table1 的属性没有填写完整那么table1 的属性就会被修改掉）
+14、修改字段属性：
+	alter table tbl_name modify column_name ＋属性;
+	alter table tbl_name change column_name旧 column_name新 新属性;
+15、添加和删除默认值：	
+	添加：
+		alter table tbl_name alter column_name set default 默认值;
+	删除：
+		alter table tbl_name alter column_name drop default;
+	

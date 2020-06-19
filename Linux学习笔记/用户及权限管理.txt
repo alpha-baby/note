@@ -1,0 +1,39 @@
+组创建：groupadd
+	groupadd [option]...group_name
+	
+		-g GID:指明GID [GID_MIN,GID_MAX] 
+		-r:创建系统组
+			centos6： ID < 500
+			centos7:  ID < 1000
+查看用户的ID信息：id
+	id [option]... [user]
+		-u:UID 
+		-g:GID
+		-G:Groups
+		-n:显示名称
+	切换用户或者以其他用户身份执行命令su：
+		su [option...] [-] [user [args...]]
+			切换用户的方式：
+				su username：非登录式切换，即不会读取目标用户的配置文件
+				su - username：登录式切换，会读取目标用户的配置文件：完全切换
+		Note：root 苏到其他的用户不需要密码，非root用户需要密码
+		执行命令：
+			su [-] username -c command 不登录其他的用户但是以其他的身份执行命令或者叫换个身份执行命令
+		选项：
+			-l ：su -l username 相当于 su - username   - -l --login 也就是一相当于一个
+	 用户属性修改：usermod
+		usermod [option] login
+		
+			-u UID: 新UID
+			-g GID：新的基本组
+			-G Group1[,Group2...]：新的附加组，原有的附加组会被覆盖，若要保留原有，则要同时使用-a选项，表示append
+			-s SHELL：新的默认shell
+			-c 'comment': 新的注释信息
+			-d HOME：新的家目录：原有家目录中的文件不会同时移动至新的家目录：若要移动，则同时使用-m选项
+			-l login_name：新的名字
+			-L：锁定用户
+			-U：解锁用户
+	给用户添加密码：passwd
+		passwd username：修改指定用户的密码，仅root用户权限
+		passwd：修改自己的密码
+		

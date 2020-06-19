@@ -1,0 +1,91 @@
+回顾：文件管理命令、bash的基础特性、文件本管理
+	
+	文件管理命令：cp、mv、rm
+	bash基础特性：alias/unalias，glob（*，?，[],[^])快捷键
+	IO重定向、管道:
+		标准输出重定向：>()覆盖重定向,>>追加重定向
+		标准错误重定向：2> , 2>>
+		
+			&> , &>> 也等同
+			COMMAND > /path/to/somefile.out  2> &1
+			
+		输入重定向：
+			显示使用：tr
+			隐式使用：。。。
+		管道：COMMAND1 | COMMAND2 | COMMAND3 | ...
+	文本管理命令：wc，cut，sort，uniq
+	
+用户和组管理：
+	资源分配
+		Authentication：认证
+		Authorzacation：授权
+		Acccouting：审计  也叫作  Audition
+		token、identity（username/password）
+	linux用户：Username/UID
+		管理员：root,ID号为0
+		普通用户：1-65535
+			系统用户：1-499
+				对守护进程获取资源进程进行权限分配
+			登录用户：500+
+				交互式登录
+	linux组：Group/GID
+		管理组：root
+		普通组：
+			系统组：1-499 centos7 1-999 
+			普通组：500+,1000+
+	linux安全上下文：
+		运行中的额程序：进程（process）
+			以进程发起者的身份运行：
+				root：cat
+				tom：cat
+				（一个进程能访问什么，取决于这个进程的发起者）
+	linux组的类别：
+		用户的基本组（主组）:
+			组名同用户名，且仅包含一个用户：私有组
+		用户的附加组（额外组）：
+	
+	linux用户和组相关的配置文件：
+		/etc/passwd:用户及其属性信息（名称、UID、基本组ID等等）
+		/etc/group:组及其属性信息
+		/etc/shadow:用户密码及其相关属性
+		/etc/gshadow:组密码及其相关属性：
+	/etc/passwd
+		name:passwd:UID:GID:GECOS:directory:shell
+		用户名:密码:UID:GID:用户的完整信息:用户的主目录:默认shell
+	/etc/group
+		group_name:passwd:GID:user_list
+		组名:组密码:GID:以当前组为附加组的用户列表（分隔符为逗号）
+	/etc/shadow:
+		login_name:加密后的密码:最近一次更改密码的日期:密码的最小使用期限:密码的最大使用期限:密码警告时间段:账号的过期日期:保留字段
+		
+			加密机制：明文<...>密文
+				加密：明文--》密文
+				解密：密文--》明文
+				单向加密：提取数据指纹
+					md5：message digest， 128bit
+					sha1：secure hash algorithm，160bits
+				雪崩效应：初始的条件的微小改变，将引起结果的巨大改变
+				定长输出：
+			密码的复杂性策略：
+				1、使用数字、大小写字母、特殊字符
+				2、足够长
+				3、一定不要使用易猜测的密码：使用随机密码
+				4、定期更换，不要使用最近曾经使用过的密码
+	用户和组相关的管理命令：
+		用户创建：
+			useradd [option] login
+				-u UID:[UID_MIN,UID_MAX],定义在/etc/login.defs
+				-g GID或者组名:指明用户的基本组
+				-c ‘COMMENT’ :用户的注释信息
+				-d /path/to/home_dir：指明用户的家目录 在指明家目录的时候会从/etc/skel 
+					中复制全部文件到新的家目录中 其中里面的文件定义了用户的环境
+				-s shell：指明shell 如果不特别指明 则在/etc/default/useradd文件中定义了shell变量 可用的shell在/etc/shells
+				-G GROUP1,GROUP2,GROUP3。。：指明用户的附加组，组必须提前存在
+				-r ：创建系统用户
+					centos6：id < 500
+					centos7：id < 1000
+			默认值设定：/etc/default/useradd 
+				useradd -D 修改默认值
+					-s SHELL
+	练习：
+		创建用户gentoo，附加组为distro和linux,注释信息为“gentoo Distribution”；

@@ -1,0 +1,316 @@
+bash的基础特性：
+	（1）命令历史
+		history
+			环境变量：
+				HISTSIZE：命令历史记录的条数
+				HISTFILE：~/.bash_history 每个用户的HISTFILE不一样都在每个用户的家目录下面
+				HISTFILESIZE：命令历史文件记录的条数
+			history -d OFFSET （删除历史命令）
+			history ＋数字 （显示最近的命令历史）
+				-c：清空当前历史命令；
+				-a： 手动追加当前会话缓冲区的命令历史至历史文件中
+			调用历史中的命令：
+				!+#:重复执行第#条命令
+				!!:重复执行上一次的命令
+				!string:重复执行历史中以string开头的命令
+			调用上一条命令的最后一个参数：
+				!$:
+				ESC, .
+			控制命令的历史的记录方式：
+				环境变量：HISTCONTROL （输出环境变量用echo $HISTCONTROL 修改环境变量用：export 变量名="值"）
+					ignoredups：忽略重复并且连续相同的命令 
+					ignorespace：
+					ignoreboth：
+	（2）命令补全：
+		bash执行命令：（敲击Tab键 补全 如果命令不唯一再敲击会给出提示列表）
+			内部命令：
+			外部命令：bash根据PATH环境变量定义的路径，自左而右在每个路径搜寻以给定命令名命名的文件，第一次找到即为要执行的命令
+	（3）路径补全：
+		把用户给出的字符串当做路径的开头并在其指定上级目录下搜索以指定的字符串开头的文件名：
+			如果唯一就补全
+			如果不唯一就给出提示列表
+	（4）命令行展开：
+		~：展开为用户的主目录
+		~USERNAME：展开为指定用户的主目录
+		{}：可承载一个以逗号分隔的列表，并将其展开为过个路径
+			/tmp/{a,b} = /tmp/a, /tmp/b 
+	（5）命令的执行结果状态
+		成功
+		失败 
+		
+		bash使用特殊变量$?保存最近一条命令的执行状态结果
+			0：成功
+			1-255：失败
+		程序的执行有两类的结果：
+			程序的返回值：
+			程序的运行状态结果：（成功或者失败）
+	目录管理命令：
+		cd, pwd, ls
+		mkdir, rmdir, tree
+		mkdir [options] /path/to/somewhere (注意 Linux下不能创建重复的路径，路径不能和文件重名)
+			-p 如果路径存在，在执行创建的时候也不报错，也可以自动的创建需要的各个父目录
+			-v 打印出详细的创建过程
+			-m MODE：创建目录时直接指定权限：
+		rmdir：
+			rmdir [OPTION] directory..
+			-p （递归删除空目录，遇到不为空的目录则不会删除）
+			-v 显示详细过程
+		tree:(显示目录的层级结构命令)
+			-d 只显示目录不显示文件_
+			-l level 只显示指定的层数
+			-p 只显示由指定pattern匹配到的路径
+	文本文件查看类命令：
+		cat，tac
+		more， less，tail，head
+		
+		more：
+			more [option] FILE..
+		less:
+			less [OPTION] FILE..
+		head:
+			head [OPTION] FILE..
+				-c #:指定获取前#个字节
+				-#：也表示前10行
+				-n #：指定获取前#行
+				不给参数也表示默认的前十行
+		tail：用法和head的相似，只不过的后面开始算
+			-f ：查看到了最后不退出，自动的查看最新追加的内容 如果要退出就用ctrl+c 退出
+	文件的时间戳管理工具：
+		touch
+		
+		文件：metadata，data
+			查看文件状态：stat
+			
+			三个时间戳：
+				access time：访问时间 简写atime 读取文件内容
+				modify time：修改时间	mtime	改变文件内容（数据）
+				change time：改变时间	ctime	元数据发生改变
+		touch：
+			touch [OPTION] FILE
+				-a ：only atime
+				-m：only mtime
+				-t STAMP：
+					[[CC]YY]MMDDHHMM[.SS]
+				-c:如果文件不存在就不会创建新的文件，如果文件存在就更新文件的时间戳
+回顾：
+	文件系统、bash的基础特性、目录管理及文件查看
+	
+		文件系统：
+			boot、bin、sbin、lib64、dev、home、dev、home、root、etc。proc。sys
+			usr、
+			var、
+		bash基础特性：
+			命令补全：
+			路径补全：
+			命令历史：
+			命令行展开：
+				~，{}
+				命令状态：
+					成功：0
+					失败：1~255
+		目录管理的相关命令：
+			mkdir、rmkir
+			-p、-v
+		文件查看命令：more、less、tail、head
+		
+		文件的时间戳管理命令：touch
+			-a、-m、t、-c 
+文件管理相关的命令：
+	cp，mv，rm
+		复制命令：cp（copy）
+			cp [OPTION]... [-T] SOURCE DEST
+			cp [OPTION]... SOURCE... DIRECTORY
+			cp [OPTION]... -t DIRECTIORY SOURCE
+			
+			cp SRC DEST 
+				如果目标不存在，新建DEST，并将SRC中的内容填充至DEST中；
+				如果目录存在：
+					如果DEST是文件：将SRC中的内容覆盖至DEST中：
+						此时建议为cp命令使用-i选项：（在普通用户是交互式的提醒用户是否覆盖原有的文件，） 
+					如果DEST是目录：在DEST下新建与原文件同名的文件，并将SRC中的内容填充至新文件中：
+			cp SRC...(表示多个文件) DEST
+				要求DEST必须存并在，且为目录，其它的情形都为错
+			cp SRC DEST:
+				如果SRC是目录：
+					要使用专用的选项：-r
+					
+					如果DEST不存在：
+						创建目标目录，复制SRC目录中的所有文件至DEST中，
+						如果DEST存在：
+							如果DEST是文件：报错
+							如果DEST是目录：
+			常用选项：
+				-i：交互式（提醒用户是否确定覆盖原有的内容）
+				-r，-R：递归复制目录及内部所有文件
+				-a：归档，相当于-dR --preserv=all（保留所有属性）
+					-d: --no-dereference --preserv=links(不追踪符号链接)
+					--preserv[=ATTR_LIST]
+						mode：权限
+						ownership：属主属组
+						timestamp：
+						links：
+						xattr：
+						context：
+						all： 
+				-p：--preserv=mode，ownership，timestamp
+				-v：显示详细信息 --verbose
+				-f：强制模式
+		mv move移动命令：
+			mv [OPTION]... [-T] SOURCE DEST
+			mv [OPTION]... SOURCE... DIRECTORY
+			mv [OPTION]... -t DIRECTORY SOURCE
+			
+			如果SRC是单个文件：
+				如果DEST不存在：
+				
+			常用选项：
+				-i：交互模式
+				-f：强制模式
+		rm remove删除：
+			-f：强制模式
+			-i：交互式
+			-r：递归（可以用来删除目录）
+	nano ：简单的文本编辑器
+		全屏幕的文本编辑器
+	
+	bash的基础特性（2）：
+		1、命令别名（alias）：
+			通过alias命令实现，alias是内建命令
+			alias：显示当前shell进程所有可用的命令别名
+			alias [-p] [name=[command]] :建立别名命令 
+			
+			注意：紧紧对当前shell进程有效 如果想永久有效，定义在配置文件中：
+				仅对当前用户有效：~/.bashrc
+				对所有用户有效：/etc/bashrc
+				Note:编辑配置给出的新配置不会立即生效
+				bash经常重新读取配置文件：
+					source /path/to/config_file
+					. /path/to/config_file
+			撤销别名：unalias
+			
+			Note：如果别名同原命令的名称，则如果要执行原命令，可使用“\command”
+	2、glob（globbing）
+		可在bash中用于文件名通配：
+			通配符：*，?，[]
+			(1):*
+				任意长度的任意字符 也可以为零
+			（2）：?
+				任意单个字符：
+			（3）：[]
+				只能指定任意范围内的任意单个字符
+					[0-9] 数字字符 不区分大小写 
+					[a-z] 不区分字母的大小写
+					[A-Z] 只匹配大写
+			（4）[^]
+				匹配指定范围之外的字符
+			（5）专用字符集合：
+				[:alnum:]：字母和数字
+				[:alpha:]：字母
+				[:cntrl:]：控制（非打印）字符
+				[:digit:]：数字
+				[:graph:]：图形字符
+				[:lower:]：小写字母
+				[:print:]：可打印字符
+				[:punct:]：标点符号
+				[:space:]：空白字符
+				[:upper:]：大写字母
+				[:xdigit:]：十六进制字符
+题目：
+	1、显示/var目录下所有以1开头，以一个小写字母结尾，且中间出现至少一位数字的文件或者目录：
+		# ls -d /var/l*[0-9]*[[:lower:]]
+	2、显示/etc目录下，以任意一位数字开头，且以非数字结尾的文件或者目录：
+		# ls -d /etc/[0-9]*[^0-9]
+	3、显示/etc/目录下以非字母开头，后面跟了一个字母及其任意长度字符的文件或者目录
+		# ls -d /etc/[^a-z][a-z]*
+	4、复制/etc目录下，所有以m开头，以非数字结尾的文件或者二目录至/tmp/mageedu目录下
+		cp -a /etc/m*[^[:digit:]] /tmp/mageedu (/tmp/mageedu 不存在就需要新创建)
+	5、复制/etc目录下，所有以.d结尾的文件或者目录，至/tmp/mageedu目录中
+ 		cp -a /etc/*.d /tmp/mageedu 
+	6、复制/etc目录下，所有.conf结尾，以m,n,r,p开头的文件或者目录至/tmp/mageedu.com目录中
+		cp -a /etc/[mnrp]*.conf /tmp/mageedu.com 
+	3、bash的快捷键
+		ctrl+l：相当于clear命令
+		ctrl+a：跳转至命令开始处，命令行的最左侧
+		ctrl+e： 跳传至命令的结尾处
+		ctrl+c：强制终止命令执行
+		ctrl+u：删除命令行光标前所有的内容
+		ctrl+k：删除光标以后所有的命令
+	4、bash的I/O重定向及管道
+		程序：指令+数据
+			读入数据：Input
+			输出数据：Output
+		打开的文件都有一个fd：file descriptor（文件描述符）
+			
+		标准输入：keyborad
+		
+		I/O重定向：改变标准位置
+			输出重定向：command > new_pos, command >> new_pos
+				>: 覆盖重定向，new_pos一般是文件，目标中原有的内容会被清除
+				>>: 追加重定向，新内容会追加至目标文件尾部
+				>|:强制覆盖
+				# set -c：禁止将内容覆盖输出至已有文件中：对当前shell进程有效
+				set +c：可以关掉此功能
+				2>；覆盖错误重定向（who只能定向错误数据流）。
+				2>>:追加重定向，错误输出数据流标准输出和错误输出各自定性至不同的位。
+				置：
+					command > /path/to/file.out 2> /path/to/error.out
+				合并标准输出和错误输出为同一个数据流进行重定向：	
+					&>:覆盖重定向
+					&>>:追加重定向
+					command > /path/to/file.out 2> &1(把第二个数据流导向到一号数据流，是的两个数据流合并)
+			输入重定向：<
+				tr命令：转换或删除字符
+					tr [OPTION]... set1 [set2] 
+					-d:删除指定字符 
+				here documentation：<<
+					# cat <<  EOF
+					# cat > /path/to/somefile << EOF（创建一个文件）
+			管道：
+				command1 | command2 | command3 | ...
+				Note:最后一个命令会在当前shell进程的子shell进程中执行
+				
+				tee命令：用于将数据重定向到文件，另一方面还可以提供一份重定向数据的副本作为后续命令的stdin。简单的说就是把数据重定向到给定文件和屏幕上。
+					tee [OPTION] 参数
+					-a：使用追加模式
+			练习：1、将/etc/passwd文件中的前5行内容转换为大写保存至/tmp/passwd.out
+					# head -n 5 /etc/passwd | tr 'a-z' 'A-Z' > /tmp/passwd.out
+				2、将登陆至将前系统上用户信息中的后三行信息转换为大写后保存至/tmp/who.out文件中：
+					# who | tail -n 3 | tr 'a-z' 'A-Z' > /tmp/who.out
+文本处理工具：wc，cut，sort，uniq
+	wc：统计文件内容的行数、单词、字母数。
+		-l：只显示行数
+		-w：只显示单词数
+		-c：只显示字母数
+	cut：以指定的分隔符切割文件
+		-d：分隔符 默认为TAB
+		-f：选取列的列表，既选取每行的第N列，可以用N-M列，
+		-c：选取字符的列表，即选取每行的第N个字符。(英文字符下与-b没有区别，中文字符下，一个中文占据2-3个字节，所以存在中文的时候更倾向于用-c)。
+		-b：选取字节的列表，即选取每行的第N个字节。
+		--output-delimiter=STRING 指定输出时候的分隔符
+	sort：排序
+		-f：忽略字符大小写
+		-r：逆序
+		-t：指明分隔符
+		-k：指明哪个字段排序
+		-n：（如果不加-n就以字符串的ascii排序，加上以后就以数字大小排序）
+		-u：排序后去重显示
+	uniq命令：
+		uniq [OPTION]... [FILE]...
+		Note:连续且完全相同方为重复
+			-c：显示每行重复出现的次数
+			-d：仅显示重复过的行
+			-u: 仅显示不曾重复的行
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
