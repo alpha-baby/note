@@ -89,6 +89,10 @@ awesome 加关键字
 
 ![](https://test.demo-1s.com/images/2019/07/05/PvvHZCanX591ZuvV.jpg)
 
+## github cdn 加速
+
+国内下载 GitHub 速度基本都是以几个 kb 为单位，不忍直视，如果下载内容都是代码，有很多办法可以解决，比如通过码云中转啊、直接通过 CDN 下载啊，什么？你不知道可以通过 CDN 下载？好吧没关系，现在我告诉你了：https://cdn.con.sh/。
+但是上面的 CDN 并不能下载 release 里的内容，要想下载 release 里的内容，可以使用这个网站：https://toolwa.com/github/。打开网站，输入 release 里面的文件下载链接，点击起飞即可加速下载。
 
 # 总结
 
