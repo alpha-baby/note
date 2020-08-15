@@ -2,6 +2,20 @@
 
 **grep** 全称（Global Regular Expression Print），它是linux中非常常用的命令，在工作和学习中也可以大大提升我们的效率，我们学习它的基本用法是非常有必要的。
 
+## 常用
+
+```bash
+# 搜索/home/sqlsec/Desktop/BBS/中的所有php后缀中的password关键词
+grep -r "password" --include="*.php"  /home/sqlsec/Desktop/BBS/
+
+# 可以添加多个后缀
+grep -r "关键词" --include="*.后缀1"  --include="*.后缀2" 目标路径
+
+# 搜索/home/sqlsec/Desktop/BBS/中的所有php后缀中的password关键词
+# 不搜索js后缀
+grep -r "password" --include="*.php" --exclude="*.js"  /home/sqlsec/Desktop/BBS/
+```
+
 ## 入门第一条命令
 
 ```zsh
@@ -212,3 +226,4 @@ root:x:0:0:root:/root:/bin/bash
 bin:x:2:2:bin:/bin:/usr/sbin/nologin
 sync:x:4:65534:sync:/bin:/bin/sync
 ```
+
