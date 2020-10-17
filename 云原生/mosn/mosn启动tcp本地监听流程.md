@@ -16,6 +16,15 @@ MOSN 是一款使用 Go 语言开发的网络代理软件，作为云原生的�
 3. 这些包的调用顺序是怎样的
 4. 项目提供的某个功能的源码被封装到了哪个包中
 
+> 参考
+> https://mosn.io/blog/posts/mosn-source-code-brief/
+
+**不要硬看代码，尤其对于多协程程序。**
+
+1. 打印日志。
+2. debug.printStack 来查看某一个方法之前的调用栈。
+3. fmt.Printf("==> %T\n",xx) 如果一个interface 有多个“实现类” 可以通过%T 查看struct 的类型。
+
 # mosn源码分析思路
 
 golang的一大特殊就是书写简单，语法简洁吗，相比java、python等相对简单。
