@@ -1,0 +1,6 @@
+* [首页](/)
+* [编程语言](/progarmming-languages/)
+* [go](/progarmming-languages/go/)
+* [c++](/progarmming-languages/c++/)
+* [node.js](/progarmming-languages/nodejs/)
+* [python](/progarmming-languages/python/)

@@ -1,6 +1,8 @@
 # vector容器
+
 ## vector容器的初始化
-```
+
+```cpp
 #include <iostream>
 #include <vector>
 
@@ -17,8 +19,10 @@ int main()
 	return 0;
 }
 ```
+
 ## vector的常用赋值操作
-```
+
+```cpp
 #include <iostream>
 #include <vector>
 
@@ -39,7 +43,8 @@ int main()
 	return 0;
 }
 ```
-```
+
+```cpp
 int main()
 {
 	int arr[] = { 10, 20 ,30, 40 };
@@ -54,11 +59,17 @@ int main()
 	return 0;
 }
 ```
+
 ## vector的大小操作
+
 **返回容器中元素的个数**
+
 `size(); `
+
 **判断容器是否为空**
+
 `empty(); `
+
 **_重新制定容器的长度为num，若容器变长，则以默认值填充新位置。如果容器变短则末尾超出容器长度的元素被删除。_**
 `resize(int num)`
 **_重新制定容器的长度为num，若容器变长，则以elem填充新位置。如果容器变短则末尾超出容器长度的元素被删除_。**
@@ -69,8 +80,10 @@ int main()
 `capacity()`
 **容器预留len个元素长度，预留位置不初始化，元素不可访问, 返回的值比size()更大**
 `reserve(int len)`
+
 ## vector存取数据
-```
+
+```cpp
 #include <iostream>
 #include <vector>
 
@@ -87,6 +100,7 @@ int main()
 	return 0;
 }
 ```
+
 其中at() 和 []的区别在于如果越界at会抛出out_of_range的异常，而[]则不会抛出异常
 **返回容器中的第一个元素**
 `front()`
@@ -107,8 +121,10 @@ int main()
 `clear() `
 
 ### vector空间收缩
+
 在插入数据时，如果容器的容量不够则会重新申请分配空间，但是如果容器的容量大很，我们执行resize后并不会减小，钥怎样收缩空间呢？请看下代码：
-```
+
+```cpp
 #include <iostream>
 #include <vector>
 inline void showSize(std::vector<int> &v1) {

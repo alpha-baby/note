@@ -22,7 +22,7 @@
 
 直接看原始论文中的配图吧。
 
-![skip_list](https://upload-images.jianshu.io/upload_images/13859457-800ebb71e046edcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://tva1.sinaimg.cn/large/0081Kckwly1gjy8u4jmmzj30m80bsjtp.jpg)
 
 1. 都会保存一个值，这个值是用来排序的key。
 2. 可以从途中看出每个元素都会有个`指针数据`：比如`e`行中的 `6`, `17`, `25`, 这几个比较明显。
@@ -164,7 +164,7 @@ func (list *SkipList) SetProbability(newProbability float64) {
 
 首先我们看下论文中出现的查询的一个说明图，看最上面的那个图就好
 
-![skip list insert element](https://upload-images.jianshu.io/upload_images/13859457-3f7826195dc20672.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![skip list insert element](https://tva1.sinaimg.cn/large/0081Kckwly1gjy8uj9r2aj30rk0axacg.jpg)
 
 在图中的第一个查找中，查询`12`
 
