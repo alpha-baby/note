@@ -12,13 +12,17 @@ Docker启动Mysql
 2. 拉取镜像：docker pull mysql
 3. 准备Mysql数据存放目录，我这里是：/home/ljaer/mysql
 4. 执行指令启动Mysql
+
     ```bash
-    docker@default:~$ docker run --name mysql -v /home/ljaer/mysql:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:latest
-    ae6314a69997ba2d6036aced07506a47c9d730592fc3fd741d125f104bae6c3c
+    docker@default:~$ docker run --name mysql8.0-dev -v /home/ljaer/mysql:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:8.0
     ```
+
 5. 检查结果
+
     ```bash
-    docker@default:~$ docker ps
+    docker@default:~$ docker ps -a                                
+    CONTAINER ID        IMAGE               COMMAND                  CREATED    STATUS                     PORTS                                                                      NAMES
+    b781ad5f9ade        mysql:8.0           "docker-entrypoint.s…"   4 minutes ago       Up 4 minutes               0.0.0.0:3306->3306/tcp, 33060/tcp                                          mysql8.0-dev
     ```
 
     docker@default:~$ cd /home/ljaer/mysql/
@@ -27,30 +31,45 @@ Docker启动Mysql
     ca-key.pem          client-key.pem      ib_logfile1         mysql/              public_key.pem      sys/
     ca.pem              ib_buffer_pool      ibdata1             performance_schema/ server-cert.pem
 
-*   6、执行指令关闭Mysql
+6. 执行指令关闭Mysql
 
-    docker@default:~$ docker stop mysql
-    mysql
+    ```bash
+    docker@default:~$ docker stop mysql8.0-dev
+    ```
 
-*   7、进入容器
-    
-    Docker ps
-    
+7. 进入容器
 
-查到容器id
+    ```bash
+    docker exec -it mysql8.0-dev bash
+    ```
 
-    docker exec -it id /bin/bash
-    
+8. 进入MySQL
 
-进入MySQL
+    ```bash
+    mysql -u root -p
+    ```
 
-    mysql
-    
+9. 查看配置文件
 
-*   8、查看配置文件
-    
-    /etc/mysql/mysql.conf.d/mysqld.cnf
-    
+    ```bash
+    cat /etc/mysql/my.conf
+    ```
+
+10. 修改密码加密方式(可选)
+
+    ```bash
+    发现登录不了，报错：navicat不支持caching_sha_password加密方式
+    原因：mysql8.0使用新的密码加密方式：caching_sha_password
+    解决方式：修改成旧的加密方式（mysql_native_password），并重置密码
+    * select host,user,plugin from user;
+    * alter user 'root'@'%' identified with mysql_native_password by '123456';
+    ```
+
+    ![](https://tva1.sinaimg.cn/large/0081Kckwly1gkr627ehy8j30jg0exmyy.jpg)
+
+11. 可以使用navicat 等客户端远程连接上mysql
+
+
 
 ### 二、 docker 运行 mysql 主从备份，读写分离
 
