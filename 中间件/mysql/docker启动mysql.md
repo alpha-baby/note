@@ -25,12 +25,14 @@ Docker启动Mysql
     b781ad5f9ade        mysql:8.0           "docker-entrypoint.s…"   4 minutes ago       Up 4 minutes               0.0.0.0:3306->3306/tcp, 33060/tcp                                          mysql8.0-dev
     ```
 
+    ```bash
     docker@default:~$ cd /home/ljaer/mysql/
     docker@default:/home/ljaer/mysql$ ls
     auto.cnf            client-cert.pem     ib_logfile0         ibtmp1              private_key.pem     server-key.pem
     ca-key.pem          client-key.pem      ib_logfile1         mysql/              public_key.pem      sys/
     ca.pem              ib_buffer_pool      ibdata1             performance_schema/ server-cert.pem
-
+    ```
+    
 6. 执行指令关闭Mysql
 
     ```bash
