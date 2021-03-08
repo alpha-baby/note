@@ -21,6 +21,9 @@ go clean -modcache
 
 **4. 虽然你配置了ssh公钥到私有仓库中，但是有时候go mod download 包的时候并不是走的ssh协议，而是http协议**
 
+> 参考
+> [Go源码阅读-私有库拉取问题](https://www.jianshu.com/p/f6d6d6dd278d?utm_campaign=studygolang.com&utm_medium=studygolang.com&utm_source=studygolang.com)
+
 有两种方法可以解决这个问题：
 
 - 3.1 第一种：配置上这个环境变量：`export GIT_TERMINAL_PROMPT=1`，然后重新下载包

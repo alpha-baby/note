@@ -9,26 +9,17 @@
 
 # 使用kubeasz安装命令
 
-CentOS7 安装依赖
+CentOS7 安装
 
 ```bash
-# 文档中脚本默认均以root用户执行
-# 安装 epel 源并更新
-yum install epel-release -y
-yum update
-# 安装依赖工具
-yum install python python-pip -y
-```
-
-```bash
-export release=2.2.3
-curl -C- -fLO --retry 3 https://github.com/easzlab/kubeasz/releases/download/${release}/easzup
-chmod +x ./easzup
-./easzup -D -d 19.03.14 -k v1.18.14
-./easzup -S
-docker exec -it kubeasz easzctl start-aio
+export release=3.0.0
+curl -C- -fLO --retry 3 https://github.com/easzlab/kubeasz/releases/download/${release}/ezdown
+chmod +x ./ezdown
+./ezdown -D -d 19.03.14 -k v1.18.15
+./ezdown -S
+docker exec -it kubeasz ezctl start-aio
 # 销毁集群
-docker exec -it kubeasz easzctl destroy
+docker exec -it kubeasz ezctl destroy default
 ```
 
 > 注意
@@ -73,18 +64,16 @@ source ~/.bashrc
 
 [kubecm](https://kubecm.cloud/#/zh-cn/)安装和使用
 
-
-
 # shell脚本
 
 ```shell
 #!/bin/sh
-export release=2.2.3
-curl -C- -fLO --retry 3 https://github.com/easzlab/kubeasz/releases/download/${release}/easzup
-chmod +x ./easzup
-./easzup -D -d 19.03.14 -k v1.18.14
-./easzup -S
-docker exec -it kubeasz easzctl start-aio
+export release=3.0.0
+curl -C- -fLO --retry 3 https://github.com/easzlab/kubeasz/releases/download/$\{release\}/ezdown
+chmod +x ./ezdown
+./ezdown -D -d 19.03.14 -k v1.18.15
+./ezdown -S
+docker exec -it kubeasz ezctl start-aio
 ```
 
 # 清理

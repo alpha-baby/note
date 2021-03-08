@@ -27,13 +27,15 @@ servicer network restart
 
 **静态ip设置，修改ifcfg文件**: `/etc/sysconfig/network-scripts/ifcfg-enp33：`
 
+> 参考 https://blog.csdn.net/johnnycode/article/details/50184073
+
 ```
 BOOTPROTO=static
 ONBOOT=yes
 IPADDR=192.168.7.106 　　#静态IP  
 GATEWAY=192.168.7.1 　　#默认网关  
 NETMASK=255.255.255.0　　 #子网掩码  
-DNS1=192.168.7.1　　 #DNS 配置
+DNS1=8.8.8.8　　 #DNS 配置
 ```
 
 **DHCP状态下查看网关地址：**
@@ -88,7 +90,6 @@ sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
 yum install -y wget  
 ```
 
-
 # 更换yum源 
 
 备份系统旧配置文件
@@ -102,6 +103,8 @@ mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
 
 ```bash
 wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+# or
+curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
 ```
 
 更新缓存
@@ -109,6 +112,19 @@ wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos
 ```bash
 yum clean all  
 yum makecache  
+```
+
+# 安装 virtualBox 增强工具(可选)
+
+首先在virtualBox中点击安装，然后再执行如下命令
+
+```bash
+mount /dev/cdrom /mnt
+cd /mnt
+./VBoxLinuxAdditions.run
+# 如果报错缺少 bzip2 not found.  Please install: bzip2 tar; and try again.
+# 执行如下命令安装，然后再重新执行安装命令 ./VBoxLinuxAdditions.run
+yum install -y bzip2
 ```
 
 # 安装unzip 
