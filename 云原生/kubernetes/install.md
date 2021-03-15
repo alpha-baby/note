@@ -1,5 +1,15 @@
 # kubetnetes 安装
 
+## kubeadm 工具安装
+
+**参考文章如下**
+
+[k8s关闭防火墙](https://blog.csdn.net/qq_38900565/article/details/103426441)
+[CentOS7关闭Swap分区](https://blog.csdn.net/yefun/article/details/102772368)
+[ubuntu18.04使用kubeadm部署k8s单节点](https://www.cnblogs.com/xiaochina/p/11650520.html)
+[centos7 kubeadm部署单机k8s](https://www.cnblogs.com/quanloveshui/p/13518664.html)
+[x509 访问一个advertise-address为内网IP的内网构建的kubernetes集群的问题](https://blog.csdn.net/DANTE54/article/details/105297228/)
+[Kubernetes设置Master节点可调度pod](https://blog.csdn.net/weixin_43224068/article/details/104060320)
 ## 使用kubeeasz工具安装
 
 [kubeasz Github](https://github.com/easzlab/kubeasz/)
