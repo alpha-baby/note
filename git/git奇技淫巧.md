@@ -41,3 +41,15 @@ git pull {remote repo} refs/merge-requests/{pr id}/head
 # 例如：
 git pull remote refs/merge-requests/1000/head
 ```
+
+# 合并某个分支中的某个commit到某个分支中
+
+```bash
+git cherry-pick <commitHash>
+```
+
+# 把本地的一个新分支，推送到远程已经存在的一个老分支上
+
+```bash
+git push origin [local branch:][remote branch]
+```
