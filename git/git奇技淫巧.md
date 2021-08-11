@@ -53,3 +53,9 @@ git cherry-pick <commitHash>
 ```bash
 git push origin [local branch:][remote branch]
 ```
+
+# 合并多个commit为一个commit
+
+```git
+git rebase -i [commit id]
+```
