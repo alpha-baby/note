@@ -3,6 +3,7 @@
 * [JWT](/other/JWT)
 * [mac终端走代理](/other/mac终端走代理)
 * [小白入坑同性交友网站github总结](/other/小白入坑同性交友网站github总结)
+* [Mac强制更换壁纸](/other/Mac强制更换壁纸)
 
 ---
 
