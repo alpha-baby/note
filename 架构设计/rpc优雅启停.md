@@ -209,6 +209,7 @@ gRPC 中那么复杂是因为 HTTP2 协议中 stream 的生命周期复杂的复
 
 很多 RPC 协议都没这么发复杂，这里我们以 dubbo 协议为例。
 
+0. 当 server 需要停机的时候就不要再给 client 发送业务数据了(有的协议可以 server 是可以主动给 client 发送业务请求的)
 1. server 收到停止信号后，停止接受新连接，然后向 client 发送 Goaway
 2. client 收到 Goaway 后从连接池中移除该连接，然后等待所有请求处理完成，然后关闭连接
 3. server 一直等待，等到所有连接都关闭然后停止进程
