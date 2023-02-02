@@ -206,7 +206,7 @@ GOSSAFUNC="main" go build main.go
     -   可以省略，因为编译器可以从 Go 语言的函数声明中推导出函数参数的大小
 -   如果 framesize 大于 0，而且 framepointer enabled，则 BP 寄存器也会压栈，同时真 SP 寄存器向下偏移 framesize 字节，分配栈空间
 
-[![](https://hopehook.com/images/go-asm-declare.png)](https://hopehook.com/images/go-asm-declare.png)
+![02-02-b1KCO4](https://alphababy-blog.oss-cn-chengdu.aliyuncs.com/uPic/2023/02-02-b1KCO4.jpg)
 
 汇编函数定义
 
@@ -233,7 +233,7 @@ GOSSAFUNC="main" go build main.go
     -   当真 SP 寄存器被修改的时候，伪 SP、伪 FP 寄存器会发生同样的移动
     -   因此，最好不要修改真 SP，交由编译器处理
 
-[![](https://hopehook.com/images/stack_frame.png)](https://hopehook.com/images/stack_frame.png)
+![函数调用栈帧](https://alphababy-blog.oss-cn-chengdu.aliyuncs.com/uPic/2023/02-02-Gep0w0.jpg)
 
 函数调用栈帧
 
