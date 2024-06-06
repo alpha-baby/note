@@ -24,6 +24,40 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 
 终端可以用这个命令来把数据代理出去：`export all_proxy="socks5://127.0.0.1:10808"`
 
+# 配置中文 man 手册
+
+## 安装 man 命令工具
+
+```bash
+sudo apt update
+sudo apt install man-db manpages-posix
+sudo apt install manpages-dev manpages-posix-dev
+```
+
+```
+1.安装中文man手册
+sudo apt-get install manpages-zh
+
+2.查看中文man手册安装路径
+dpkg -L manpages-zh | less
+
+可见中文man手册是安装在路径/usr/share/man/zh_CN/下
+
+3.给中文man设置一个命令
+为了和系统原来的man区分开，用alias给中文man的命令设置一个别名
+
+alias cman='man -M /usr/share/man/zh_CN'
+
+为永久生效，可把上面的命令写进启动文件中
+
+如：修改 ~/.bashrc ，添加上面的命令
+
+我修改的是 /etc/bash.bashrc
+
+4.重启终端
+命令：cman可以查看中文man手册，而man可以查看原man手册（英文）
+```
+
 # 安装字体
 
 [nerd fonts](https://www.nerdfonts.com/)
